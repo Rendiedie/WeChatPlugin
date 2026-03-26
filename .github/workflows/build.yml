@@ -9,12 +9,14 @@ jobs:
 
       - name: Install Theos
         run: |
-          git clone https://github.com/theos/theos.git $HOME/theos
+          bash -c "$(curl -fsSL https://raw.githubusercontent.com/theos/theos/master/bin/install-theos)"
           echo "THEOS=$HOME/theos" >> $GITHUB_ENV
 
-      - name: Build Package
-        run: |
-          make package FINALPACKAGE=1
+      - name: Install dpkg
+        run: brew install dpkg
+
+      - name: Build
+        run: make package FINALPACKAGE=1
 
       - name: Upload
         uses: actions/upload-artifact@v4
