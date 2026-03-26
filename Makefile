@@ -1,12 +1,12 @@
 ARCHS = arm64
-TARGET = iphone:15.0:14.0
+TARGET = iphone:clang:15.0:14.0
 INSTALL_TARGET_PROCESSES = WeChat
 
 include $(THEOS)/makefiles/common.mk
 
-TWEAK_NAME = WeChatPlugin
+TWEAK_NAME = WeChatSimple
 
-WeChatPlugin_FILES = Tweak.x
-WeChatPlugin_CFLAGS = -fobjc-arc
+WeChatSimple_FILES = Tweak.x
+WeChatSimple_CFLAGS = -fobjc-arc
 
 include $(THEOS_MAKE_PATH)/tweak.mk
