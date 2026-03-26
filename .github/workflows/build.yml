@@ -1,18 +1,25 @@
 name: Build
-on: push
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
+
       - name: Install Theos
-        run: bash -c "$(curl -fsSL https://raw.githubusercontent.com/theos/theos/master/bin/install-theos)"
-      - name: Build
+        run: |
+          bash -c "$(curl -fsSL https://raw.githubusercontent.com/theos/theos/master/bin/install-theos)"
+
+      - name: Build Package
         run: |
           export THEOS=~/theos
           make package FINALPACKAGE=1
-      - name: Upload
+
+      - name: Upload Deb
         uses: actions/upload-artifact@v4
         with:
           name: Release
