@@ -1,25 +1,21 @@
 name: Build
-on:
-  push:
-    branches:
-      - main
+on: push
 
 jobs:
   build:
     runs-on: macos-15
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
       - uses: actions/checkout@v4
-
       - name: Install Theos
         run: |
           bash -c "$(curl -fsSL https://raw.githubusercontent.com/theos/theos/master/bin/install-theos)"
-
-      - name: Build Package
+      - name: Build
         run: |
           export THEOS=~/theos
           make package FINALPACKAGE=1
-
-      - name: Upload Deb
+      - name: Upload
         uses: actions/upload-artifact@v4
         with:
           name: Release
