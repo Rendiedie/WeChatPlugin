@@ -1,12 +1,15 @@
-ARCHS = arm64
-TARGET = iphone:clang:26.0:14.0
-INSTALL_TARGET_PROCESSES = WeChat
+RCHS = arm64 arm64e
+TARGET = iphone:clang:14.5:12.0
+
+INSTALL_TARGET_PROCESSES = SpringBoard
 
 include $(THEOS)/makefiles/common.mk
 
-TWEAK_NAME = WeChatSimple
+TWEAK_NAME = WeChatPlugin
 
-WeChatSimple_FILES = Tweak.x
-WeChatSimple_CFLAGS = -fobjc-arc
+WeChatPlugin_FILES = Tweak.xm $(wildcard Classes/*.m) $(wildcard Classes/**/*.m)
+WeChatPlugin_CFLAGS = -fobjc-arc -Wno-deprecated-declarations
+WeChatPlugin_FRAMEWORKS = UIKit Foundation QuartzCore CoreGraphics
+WeChatPlugin_PRIVATE_FRAMEWORKS = Preferences
 
 include $(THEOS_MAKE_PATH)/tweak.mk
